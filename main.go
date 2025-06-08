@@ -2,15 +2,20 @@ package main
 
 import (
 	"AlvinSamuelsson/chip8go/internal/chip8"
-	"fmt"
 	"log"
+
+	"github.com/gopxl/pixel/v2/backends/opengl"
 )
 
 func main() {
-	cmp, err := chip8.NewPC()
+	opengl.Run(run)
+}
+
+func run() {
+	cmp, err := chip8.NewPC("roms/ibm.ch8")
 	if err != nil {
 		log.Fatalf("\n error creating a new PC: %v \n", err)
+		panic("REE")
 	}
-
-	fmt.Printf("%v", cmp.Memory)
+	cmp.RunProgram()
 }
