@@ -15,6 +15,7 @@ const (
 
 type Chip8 struct {
 	Memory    [totalMemory]byte
+	Gfx       [64 * 32]byte
 	Vregister [vRegister]uint8
 	Iregister uint16
 	// Stack  Stack
@@ -54,7 +55,7 @@ outer:
 		case <-chip.Clock.C:
 			if !chip.window.Closed() {
 				chip.cycle()
-				//chip.DrawGraphics()
+				chip.DrawGraphics()
 				//chip.HandleInput()
 				chip.delayTimer()
 				chip.soundTimer()
@@ -105,6 +106,10 @@ func (chip *Chip8) cycle() {
 	case 0xa00:
 		chip.Iregister = nnn
 	}
+}
+
+func (chip *Chip8) DrawGraphics() {
+	chip.window.DrawGraphics(chip.Gfx)
 }
 
 func (chip *Chip8) loadFont() error {

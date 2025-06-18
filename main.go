@@ -2,9 +2,8 @@ package main
 
 import (
 	"AlvinSamuelsson/chip8go/internal/chip8"
-	"log"
-
 	"github.com/gopxl/pixel/v2/backends/opengl"
+	"log"
 )
 
 func main() {
